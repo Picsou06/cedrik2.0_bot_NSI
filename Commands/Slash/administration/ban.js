@@ -13,10 +13,9 @@ export default {
   botPermissions: ["BanMembers"],
   category: "Administration",
   type: ApplicationCommandType.ChatInput,
-
   options: [
     {
-      type: ApplicationCommandOptionType.User, // USER type
+      type: ApplicationCommandOptionType.User,
       name: "user",
       nameLocalizations: {
         fr: "utilisateur",
