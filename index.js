@@ -18,6 +18,5 @@ const client = new Client({
 });
 
 eventHandler(client);
-setupDatabase(client);
 
 client.login(process.env.TOKEN);
