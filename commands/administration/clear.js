@@ -7,7 +7,6 @@ let data = new SlashCommandBuilder()
         fr: "Permet de supprimer des messages! 🧹",
     })
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
-    .setDMPermission(false)
     .addIntegerOption(option =>
         option
             .setName("amount")

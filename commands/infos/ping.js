@@ -15,6 +15,9 @@ module.exports = {
   data: data,
 
   callback: async (client, interaction) => {
-    interaction.reply(`🏓Ping is ${(Date.now() - interaction.createdTimestamp)*-1}ms. API Latency is ${Math.round(client.ws.ping)}ms`);
+    interaction.reply({
+      content: `🏓Ping is ${(Date.now() - interaction.createdTimestamp) * -1}ms. API Latency is ${Math.round(client.ws.ping)}ms`,
+      ephemeral: true,
+    });
   },
 };
