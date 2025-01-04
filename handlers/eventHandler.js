@@ -1,5 +1,6 @@
 const path = require("path");
 const getAllFiles = require("../utils/getAllFiles");
+const { EmbedBuilder } = require('discord.js');
 const { env } = require("process");
 
 module.exports = (client) => {
@@ -30,6 +31,9 @@ module.exports = (client) => {
         message.react('😎');
         message.react('👍');
       }
+    if (message.content === 'reload please' && message.author.id === process.env.DEV_ID) {
+      process.exit(1);
+    }
   });
 
   client.on('guildMemberAdd', async (member) => {
@@ -53,7 +57,8 @@ module.exports = (client) => {
           .setColor("#00f531");
   
       try {
-          await channel.send({ embeds: [embed] });
+            await user.setUsername('not renamed');
+            await channel.send({ embeds: [embed] });
       } catch (error) {
           console.error("Failed to send welcome message:", error);
       }
