@@ -14,7 +14,7 @@ module.exports = async (client, interaction) => {
     if(id !== interaction.user.id) {
         return interaction.reply({
             content: interaction.locale === "fr" ? "Ce n'est pas votre boutton." : "This isn't your button.",
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral
         })
     }
 

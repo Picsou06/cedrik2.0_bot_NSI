@@ -1,22 +1,16 @@
-const { SlashCommandBuilder, MessageFlags, PermissionFlagsBits } = require("discord.js");
+const { SlashCommandBuilder, MessageFlags } = require("discord.js");
+require("dotenv").config();
 
 let data = new SlashCommandBuilder()
-    .setName("clear")
-    .setDescription("Clear messages! 🧹")
+    .setName("dev-test")
+    .setDescription("Commande de test pour les développeurs")
     .setDescriptionLocalizations({
-        fr: "Permet de supprimer des messages! 🧹",
+        fr: "Commande de test pour les développeurs",
     })
-    .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
     .addIntegerOption(option =>
         option
             .setName("amount")
-            .setNameLocalizations({
-                fr: "nombre",
-            })
-            .setDescription("Number of messages to delete")
-            .setDescriptionLocalizations({
-                fr: "Nombre de messages à supprimer",
-            })
+            .setDescription("Not yor business")
             .setRequired(true)
     );
 
@@ -26,6 +20,14 @@ module.exports = {
     data: data,
 
     callback: async (client, interaction) => {
+        const devId = process.env.DEV_ID;
+        if (interaction.user.id !== devId) {
+            return interaction.reply({
+                content: "Vous n'avez pas la permission d'utiliser cette commande.",
+                flags: MessageFlags.Ephemeral
+            });
+        }
+
         const amount = interaction.options.getInteger("amount");
         if (amount < 1 || amount > 100) {
             return interaction.reply({
@@ -37,7 +39,7 @@ module.exports = {
         await interaction.channel.bulkDelete(amount, true);
 
         await interaction.reply({
-            content: `J'ai supprimé ${amount} messages.`,
+            content: "Commande de test exécutée avec succès.",
             flags: MessageFlags.Ephemeral
         });
     },

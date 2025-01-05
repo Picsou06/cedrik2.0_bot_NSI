@@ -17,7 +17,7 @@ module.exports = async (client, interaction) => {
       if (!process.env.DEVLIST.includes(interaction.member.id)) {
         interaction.reply({
           content: "Seulement les développeurs peuvent éxecuter cette commande.",
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral
         });
         return;
       }
@@ -27,7 +27,7 @@ module.exports = async (client, interaction) => {
       if (!process.env.BETASERVEUR.includes(interaction.guild?.id)) {
         interaction.reply({
           content: "Cette commande ne peut pas être exécutée dans ce serveur puisqu'elle est en phase de test.",
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral
         });
         return;
       }
@@ -38,7 +38,7 @@ module.exports = async (client, interaction) => {
         if (!interaction.member.permissions.has(permission)) {
           interaction.reply({
             content: "Vous n'avez pas assez de permissions.",
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral
           });
           return;
         }
@@ -51,7 +51,7 @@ module.exports = async (client, interaction) => {
         if (!bot.permissions.has(permission)) {
           interaction.reply({
             content: "Je n'ai pas assez de permissions.",
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral
           });
           return;
         }
@@ -62,7 +62,7 @@ module.exports = async (client, interaction) => {
   } catch (error) {
     interaction.reply({
       content: "Erreur",
-      ephemeral: true,
+      flags: MessageFlags.Ephemeral
     })
     console.log(`Il y a eu une erreur lors de l'exécution de la commande`)
     console.log(error);

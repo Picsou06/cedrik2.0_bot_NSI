@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
+const { SlashCommandBuilder, MessageFlags, PermissionFlagsBits } = require("discord.js");
 
 let data = new SlashCommandBuilder()
   .setName("ping")
@@ -17,7 +17,7 @@ module.exports = {
   callback: async (client, interaction) => {
     interaction.reply({
       content: `🏓Ping is ${(Date.now() - interaction.createdTimestamp) * -1}ms. API Latency is ${Math.round(client.ws.ping)}ms`,
-      ephemeral: true,
+      flags: MessageFlags.Ephemeral
     });
   },
 };

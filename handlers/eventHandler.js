@@ -34,6 +34,18 @@ module.exports = (client) => {
     if (message.content === 'reload please' && message.author.id === process.env.DEV_ID) {
       process.exit(1);
     }
+    if (message.content.toLowerCase().includes('sigma')) {
+      if (message.author.id === '769610914135277629') {
+        message.channel.send('https://imgcdn.stablediffusionweb.com/2024/10/18/30c98f52-cd04-45ad-b8e1-cdec1508827b.jpg');
+      }
+      else {
+        message.react('1325137637018964041');
+      }
+    }
+    if (message.content.toLowerCase().includes('ratio')) {
+      message.react('🤏');
+      message.channel.send('https://tenor.com/view/uzui-better-gif-24953549');
+    }
   });
 
   client.on('guildMemberAdd', async (member) => {
@@ -57,8 +69,10 @@ module.exports = (client) => {
           .setColor("#00f531");
   
       try {
-            await user.setUsername('not renamed');
+            await member.setNickname('not renamed');
             await channel.send({ embeds: [embed] });
+            const welcomeMessage = await channel.send(`<@!${user.id}>`);
+            await welcomeMessage.delete();
       } catch (error) {
           console.error("Failed to send welcome message:", error);
       }

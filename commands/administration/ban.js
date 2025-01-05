@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
+const { SlashCommandBuilder, MessageFlags, PermissionFlagsBits } = require("discord.js");
 
 let data = new SlashCommandBuilder()
     .setName("ban")
@@ -32,7 +32,7 @@ module.exports = {
         if (member.permissions.has(PermissionFlagsBits.ManageMessages)) {
             return interaction.reply({
                 content: "Vous ne pouvez pas bannir un modérateur.",
-                ephemeral: true,
+                flags: MessageFlags.Ephemeral
             });
         }
 
@@ -40,7 +40,7 @@ module.exports = {
 
         interaction.reply({
             content: `J'ai banni ${user.tag}.`,
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral
         });
     },
 };
