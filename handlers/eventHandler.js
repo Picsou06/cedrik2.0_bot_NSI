@@ -26,7 +26,7 @@ module.exports = (client) => {
     }
   });
 
-  client.on('messageCreate', (message) => {
+  client.on('messageCreate', async (message) => {
     if (message.content === 'React please') {
         message.react('😎');
         message.react('👍');
@@ -46,7 +46,10 @@ module.exports = (client) => {
     if (message.content.toLowerCase().includes('feur'))
     {
       message.delete();
-      message.channel.send('https://media1.tenor.com/m/DLDxBkiQ9IYAAAAd/i-saved-you-from-cringe-the-cringe-is-everywhere.gif');
+      const gifmessage = await message.channel.send('https://media1.tenor.com/m/DLDxBkiQ9IYAAAAd/i-saved-you-from-cringe-the-cringe-is-everywhere.gif');
+      setTimeout(() => {
+        gifmessage.delete();
+      }, 10000);
     }
   });
 
