@@ -31,9 +31,6 @@ module.exports = (client) => {
         message.react('😎');
         message.react('👍');
       }
-    if (message.content === 'reload please' && message.author.id === process.env.DEV_ID) {
-      process.exit(1);
-    }
     if (message.content.toLowerCase().includes('sigma')) {
       if (message.author.id === '769610914135277629') {
         message.channel.send('https://imgcdn.stablediffusionweb.com/2024/10/18/30c98f52-cd04-45ad-b8e1-cdec1508827b.jpg');
@@ -45,6 +42,11 @@ module.exports = (client) => {
     if (message.content.toLowerCase().includes('ratio')) {
       message.react('🤏');
       message.channel.send('https://tenor.com/view/uzui-better-gif-24953549');
+    }
+    if (message.content.toLowerCase().includes('feur'))
+    {
+      message.delete();
+      message.channel.send('https://media1.tenor.com/m/DLDxBkiQ9IYAAAAd/i-saved-you-from-cringe-the-cringe-is-everywhere.gif');
     }
   });
 
