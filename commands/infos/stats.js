@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, MessageFlags } = require("discord.js");
+const { getPawned, getPawnedByType } = require("../../utils/setupDb");
 require("dotenv").config();
 
 let data = new SlashCommandBuilder()

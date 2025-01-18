@@ -29,7 +29,7 @@ module.exports = {
         }
 
         const amount = interaction.options.getInteger("amount");
-        if (amount < 1 || amount > 100) {
+        if (amount < 1 || amount > 10) {
             return interaction.reply({
                 content: "Le nombre de messages à supprimer doit être compris entre 1 et 100.",
                 flags: MessageFlags.Ephemeral

@@ -1,6 +1,7 @@
 const path = require("path");
 const getAllFiles = require("../utils/getAllFiles");
 const { EmbedBuilder } = require('discord.js');
+const { incrementPawned } = require('../utils/setupDb');
 const { env } = require("process");
 
 module.exports = (client) => {
@@ -27,11 +28,12 @@ module.exports = (client) => {
   });
 
   client.on('messageCreate', async (message) => {
+    if (message.author.bot) return;
     if (message.content === 'React please') {
         message.react('😎');
         message.react('👍');
       }
-    if (message.content.toLowerCase().includes('sigma')) {
+    if (/\bsigma\b/i.test(message.content)) {
       if (message.author.id === '769610914135277629') {
         message.channel.send('https://imgcdn.stablediffusionweb.com/2024/10/18/30c98f52-cd04-45ad-b8e1-cdec1508827b.jpg');
         incrementPawned(message.content, 'sigma', message.author.id);
@@ -41,12 +43,12 @@ module.exports = (client) => {
         incrementPawned(message.content, 'sigma', message.author.id);
       }
     }
-    if (message.content.toLowerCase().includes('ratio')) {
+    if (/\bratio\b/i.test(message.content)) {
       message.react('🤏');
       message.channel.send('https://tenor.com/view/uzui-better-gif-24953549');
       incrementPawned(message.content, 'ratio', message.author.id);
     }
-    if (message.content.toLowerCase().includes('feur'))
+    if (/\bfeur\b/i.test(message.content))
     {
       message.delete();
       const gifmessage = await message.channel.send('https://media1.tenor.com/m/DLDxBkiQ9IYAAAAd/i-saved-you-from-cringe-the-cringe-is-everywhere.gif');
@@ -54,6 +56,13 @@ module.exports = (client) => {
         gifmessage.delete();
       }, 10000);
       incrementPawned(message.content, 'feur', message.author.id);
+    }
+    if (/\bsus\b/i.test(message.content)) {
+      const gifmessage = await message.reply('https://tenor.com/view/among-us-sus-gif-2558655191726498734');
+      setTimeout(() => {
+        gifmessage.delete();
+      }, 5000);
+      incrementPawned(message.content, 'sus', message.author.id);
     }
   });
 

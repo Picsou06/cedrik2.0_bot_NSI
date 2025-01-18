@@ -2,9 +2,11 @@ const mysql = require("mysql2/promise");
 const dotenv = require('dotenv');
 dotenv.config();
 
+let db;
+
 async function setupDatabase(client) {
 
-    const db = await mysql.createConnection({
+    db = await mysql.createConnection({
         host: process.env.DB_HOST,
         port: process.env.DB_PORT,
         user: process.env.DB_USER,
@@ -25,31 +27,32 @@ async function setupDatabase(client) {
             timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     `);
-
-    const incrementPawned = async function (messageContent, type, userid) {
-        await db.query(`
-            INSERT INTO pawned (MessageContent, Type, userid)
-            VALUES (?, ?, ?)
-        `, [messageContent, type, userid]);
-    }
-
-    const getPawned = async function (userid) {
-        const [rows] = await db.query(`
-            SELECT * FROM pawned WHERE userid = ?
-        `, [userid]);
-        return rows;
-    }
-
-    const getPawnedByType = async function (type) {
-        const [rows] = await db.query(`
-            SELECT * FROM pawned WHERE Type = ?
-        `, [type]);
-        return rows;
-    }
-
-    client.incrementPawned = incrementPawned;
-    client.getPawned = getPawned;
-    client.getPawnedByType = getPawnedByType;
 }
 
-module.exports = setupDatabase;
+async function incrementPawned (messageContent, type, userid) {
+    await db.query(`
+        INSERT INTO pawned (MessageContent, Type, userid)
+        VALUES (?, ?, ?)
+    `, [messageContent, type, userid]);
+}
+
+async function getPawned(userid) {
+    const [rows] = await db.query(`
+        SELECT * FROM pawned WHERE userid = ?
+    `, [userid]);
+    return rows;
+}
+
+async function getPawnedByType(type) {
+    const [rows] = await db.query(`
+        SELECT * FROM pawned WHERE Type = ?
+    `, [type]);
+    return rows;
+}
+
+module.exports = {
+    setupDatabase,
+    incrementPawned,
+    getPawned,
+    getPawnedByType
+};
