@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { Client, IntentsBitField } = require("discord.js");
 const eventHandler = require("./handlers/eventHandler");
-
+const setupDatabase = require('./utils/setupDb');
 
 const client = new Client({
   intents: [
@@ -17,5 +17,6 @@ const client = new Client({
 });
 
 eventHandler(client);
+setupDatabase(client);
 
 client.login(process.env.TOKEN);

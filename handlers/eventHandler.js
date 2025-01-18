@@ -34,14 +34,17 @@ module.exports = (client) => {
     if (message.content.toLowerCase().includes('sigma')) {
       if (message.author.id === '769610914135277629') {
         message.channel.send('https://imgcdn.stablediffusionweb.com/2024/10/18/30c98f52-cd04-45ad-b8e1-cdec1508827b.jpg');
+        incrementPawned(message.content, 'sigma', message.author.id);
       }
       else {
         message.react('1325137637018964041');
+        incrementPawned(message.content, 'sigma', message.author.id);
       }
     }
     if (message.content.toLowerCase().includes('ratio')) {
       message.react('🤏');
       message.channel.send('https://tenor.com/view/uzui-better-gif-24953549');
+      incrementPawned(message.content, 'ratio', message.author.id);
     }
     if (message.content.toLowerCase().includes('feur'))
     {
@@ -50,6 +53,7 @@ module.exports = (client) => {
       setTimeout(() => {
         gifmessage.delete();
       }, 10000);
+      incrementPawned(message.content, 'feur', message.author.id);
     }
   });
 
