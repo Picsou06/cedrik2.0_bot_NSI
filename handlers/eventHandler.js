@@ -51,7 +51,7 @@ module.exports = (client) => {
     if (/\bfeur\b/i.test(message.content))
     {
       message.delete();
-      const gifmessage = await message.channel.send('https://media1.tenor.com/m/DLDxBkiQ9IYAAAAd/i-saved-you-from-cringe-the-cringe-is-everywhere.gif');
+      const gifmessage = await message.channel.send('https://c.tenor.com/DLDxBkiQ9IYAAAAd/tenor.gif');
       setTimeout(() => {
         gifmessage.delete();
       }, 10000);
