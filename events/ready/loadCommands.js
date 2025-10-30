@@ -11,6 +11,17 @@ module.exports = async (client) => {
       client
     );
 
+    for (const existingCommand of applicationCommands.cache.values()) {
+      const localCommand = localCommands.find(
+        (cmd) => cmd.data.name === existingCommand.name
+      );
+
+      if (!localCommand) {
+        await applicationCommands.delete(existingCommand.id);
+        console.log(`🗑 Commande "${existingCommand.name}" supprimée (fichier local introuvable)`);
+      }
+    }
+
     for (const localCommand of localCommands) {
       const { name } = localCommand.data;
 

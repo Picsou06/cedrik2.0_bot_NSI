@@ -50,9 +50,19 @@ async function getPawnedByType(type) {
     return rows;
 }
 
+async function getAllPawnedStats() {
+    const [rows] = await db.query(`
+        SELECT Type, COUNT(*) as count
+        FROM pawned
+        GROUP BY Type
+    `);
+    return rows;
+}
+
 module.exports = {
     setupDatabase,
     incrementPawned,
     getPawned,
-    getPawnedByType
+    getPawnedByType,
+    getAllPawnedStats,
 };

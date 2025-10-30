@@ -12,6 +12,8 @@ module.exports = (client) => {
     },
   ];
 
+ //client.channels.cache.get('1158811909219418215').send('<@1155579365023813683> Hey');	
+
   setInterval(() => {
 
     let random = Math.floor(Math.random() * status.length);
