@@ -19,4 +19,6 @@ const client = new Client({
 eventHandler(client);
 setupDatabase(client);
 
+require("./health")(client);
+
 client.login(process.env.TOKEN);
