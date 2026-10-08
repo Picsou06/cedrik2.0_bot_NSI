@@ -1,0 +1,14 @@
+services:
+  cedrikbot:
+    build: .
+    image: cedrikbot:local
+    container_name: cedrikbot
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      TZ: UTC
+    networks: [db]
+
+networks:
+  db:
+    external: true

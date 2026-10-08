@@ -1,0 +1,9 @@
+.git
+.github
+.npm
+node_modules
+.env
+.env.*
+*.log
+compose.yml
+deploy.sh
